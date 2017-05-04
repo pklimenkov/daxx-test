@@ -13,7 +13,7 @@ class Speller
   end
 
   def convert(numbers)
-    regex = transform(numbers)
+    regex = transform(validate(numbers.to_s))
     @data.select { |word| word =~ /#{regex}/ }
   end
 
@@ -29,10 +29,15 @@ class Speller
 
   def transform(numbers)
     regex = ''
-    numbers.to_s.split('').each do |digit|
+    numbers.split('').each do |digit|
       chars = Speller.new.config[:digits][digit.to_i].map { |char| "#{char.upcase}#{char.downcase}" }.join('')
       regex << "[#{chars}]{1}"
     end
     "^#{regex}$"
+  end
+
+  def validate(numbers)
+    raise 'wrong input! must be only digits' if numbers != numbers.scan(/\d/).join('')
+    numbers
   end
 end

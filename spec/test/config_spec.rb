@@ -5,7 +5,7 @@ RSpec.describe Config do
 
   it 'loads all configs from directory' do
     allow_any_instance_of(described_class).to receive(:config_directory).and_return(test_config_dir)
-    expect(described_class.new.config.keys).to eq(%i[test_config1 test_config2])
+    expect(described_class.new.config.keys).to eq(%i[digits test_config1 test_config2])
   end
 
   it 'test_configs can be accesable through []' do

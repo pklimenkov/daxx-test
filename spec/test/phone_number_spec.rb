@@ -7,15 +7,15 @@ RSpec.describe PhoneNumber do
     end
 
     it 'not valid if using zero factory' do
-      expect(build(:zeros_phone_number)).to_not be_valid
+      expect(build(:zeros_phone_number)).not_to be_valid
     end
 
     it 'not valid if using one factory' do
-      expect(build(:ones_phone_number)).to_not be_valid
+      expect(build(:ones_phone_number)).not_to be_valid
     end
 
     it 'not valid if using zero and one factory' do
-      expect(build(:zero_ones_phone_number)).to_not be_valid
+      expect(build(:zero_ones_phone_number)).not_to be_valid
     end
   end
 
@@ -33,15 +33,11 @@ RSpec.describe PhoneNumber do
     end
 
     it 'valid with X-XXX-XXXXXX' do
-      expect(described_class.new('+2-222-222222')).to be_valid
+      expect(described_class.new('2-222-222222')).to be_valid
     end
 
     it 'valid with +X XXX XXXXXX' do
       expect(described_class.new('+2 222 222222')).to be_valid
-    end
-
-    it 'valid with X XXX XXXXXX' do
-      expect(described_class.new('2 222 222222')).to be_valid
     end
 
     it 'valid with X XXX XXXXXX' do
@@ -65,15 +61,15 @@ RSpec.describe PhoneNumber do
     end
 
     it 'not valid with X.XXX.XXX.XXX' do
-      expect(described_class.new('2.222.222.222')).to_not be_valid
+      expect(described_class.new('2.222.222.222')).not_to be_valid
     end
 
     it 'not valid with X,XXX,XXX,XXX' do
-      expect(described_class.new('2,222,222,222')).to_not be_valid
+      expect(described_class.new('2,222,222,222')).not_to be_valid
     end
 
     it 'not valid with X_XXX_XXX_XXX' do
-      expect(described_class.new('2_222_222_222')).to_not be_valid
+      expect(described_class.new('2_222_222_222')).not_to be_valid
     end
   end
 
@@ -83,11 +79,11 @@ RSpec.describe PhoneNumber do
     end
 
     it 'not valid with 0' do
-      expect(described_class.new('23456789990')).to_not be_valid
+      expect(described_class.new('23456789990')).not_to be_valid
     end
 
     it 'not valid with 1' do
-      expect(described_class.new('23456789991')).to_not be_valid
+      expect(described_class.new('23456789991')).not_to be_valid
     end
   end
 end

@@ -16,17 +16,17 @@ class PhoneNumber
   validates :country, presence: true
   validates_type :country, :string, message: 'country must be string'
   validates :country, format: { with: /\A[0-9]+\Z/i,
-                              message: 'have to contain only digits' }
+                                message: 'have to contain only digits' }
 
   validates :area, presence: true
   validates_type :area, :string, message: 'area must be number'
   validates :area, format: { with: /\A[0-9]+\Z/i,
-                                message: 'have to contain only digits' }
+                             message: 'have to contain only digits' }
 
   validates :number, presence: true
   validates_type :number, :string, message: 'number must be number'
   validates :number, format: { with: /\A[0-9]+\Z/i,
-                                message: 'have to contain only digits' }
+                               message: 'have to contain only digits' }
 
   validates_each :number do |entity, attr, value|
     entity.errors.add(attr, 'must not contain 0 or 1') if value.to_s =~ /[01]+/
@@ -35,22 +35,22 @@ class PhoneNumber
   def initialize(value)
     @value = value
     parse
-    convert
   end
 
   private
 
   def parse
-    _, @country, _, @area, _, @number = @value.scan(
+    _, s_country, _, s_area, _, s_number = @value.scan(
       /(\A[\+]{0,1})([0-9]{1,3})([\-\s\(]{0,1})([0-9]{1,3})([\-\s\)]{0,1})([0-9\-]{1,15})\Z/i
     ).flatten
+    convert(s_country, s_area, s_number)
   end
 
-  def convert
-    return if @country.nil? || @area.nil? || @number.nil?
+  def convert(country, area, number)
+    return if country.nil? || area.nil? || number.nil?
 
-    @country = @country.scan(/\d/).join('')
-    @area = @area.scan(/\d/).join('')
-    @number = @number.scan(/\d/).join('')
+    @country = country.scan(/\d/).join('')
+    @area = area.scan(/\d/).join('')
+    @number = number.scan(/\d/).join('')
   end
 end

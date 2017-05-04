@@ -73,7 +73,7 @@ class Speller
         puts "........ Found matches: #{found[index].size}"
       end
       data = found.values
-      next if data.any? { |value| value.empty? }
+      next if data.any?(&:empty?)
 
       result.concat(
         data.first.product(*data[1..-1]).map { |elems| elems.join('-') }

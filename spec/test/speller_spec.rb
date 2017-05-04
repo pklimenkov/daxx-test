@@ -6,7 +6,7 @@ RSpec.describe Speller do
 
   it 'loads all configs from directory' do
     allow_any_instance_of(described_class).to receive(:data_directory).and_return(test_data_dir)
-    expect(described_class.new.data).to eq(%w{AA AAH AARDVARK AARDVARKS AARDWOLF AARDWOLVES AARGH})
+    expect(described_class.new.data).to eq(%w[AA AAH AARDVARK AARDVARKS AARDWOLF AARDWOLVES AARGH])
   end
 
   it 'if can converts number to word' do
@@ -30,6 +30,6 @@ RSpec.describe Speller do
     allow_any_instance_of(described_class).to receive(:min_chunk).and_return(3)
     allow_any_instance_of(described_class).to receive(:max_chunk).and_return(10)
     allow_any_instance_of(Config).to receive(:config_directory).and_return(test_config_dir)
-    expect(lambda { described_class.new.convert('22344dfr456') } ).to raise_error(/wrong input! must be only digits/)
+    expect(-> { described_class.new.convert('22344dfr456') }).to raise_error(/wrong input! must be only digits/)
   end
 end

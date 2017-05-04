@@ -47,6 +47,8 @@ class PhoneNumber
   end
 
   def convert
+    return if @country.nil? || @area.nil? || @number.nil?
+
     @country = @country.scan(/\d/).join('')
     @area = @area.scan(/\d/).join('')
     @number = @number.scan(/\d/).join('')

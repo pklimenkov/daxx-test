@@ -18,4 +18,76 @@ RSpec.describe PhoneNumber do
       expect(build(:zero_ones_phone_number)).to_not be_valid
     end
   end
+
+  context 'formatting' do
+    it 'valid with +XXXXXXXXXX' do
+      expect(described_class.new('+2222222222')).to be_valid
+    end
+
+    it 'valid with XXXXXXXXXX' do
+      expect(described_class.new('2222222222')).to be_valid
+    end
+
+    it 'valid with +X-XXX-XXXXXX' do
+      expect(described_class.new('+2-222-222222')).to be_valid
+    end
+
+    it 'valid with X-XXX-XXXXXX' do
+      expect(described_class.new('+2-222-222222')).to be_valid
+    end
+
+    it 'valid with +X XXX XXXXXX' do
+      expect(described_class.new('+2 222 222222')).to be_valid
+    end
+
+    it 'valid with X XXX XXXXXX' do
+      expect(described_class.new('2 222 222222')).to be_valid
+    end
+
+    it 'valid with X XXX XXXXXX' do
+      expect(described_class.new('2 222 222222')).to be_valid
+    end
+
+    it 'valid with X(XXX)XXXXXX' do
+      expect(described_class.new('2(222)222222')).to be_valid
+    end
+
+    it 'valid with +X(XXX)XXXXXX' do
+      expect(described_class.new('+2(222)222222')).to be_valid
+    end
+
+    it 'valid with X(XXX)XXX-XXX' do
+      expect(described_class.new('2(222)222-222')).to be_valid
+    end
+
+    it 'valid with +X(XXX)XXX-XXX' do
+      expect(described_class.new('+2(222)222-222')).to be_valid
+    end
+
+    it 'not valid with X.XXX.XXX.XXX' do
+      expect(described_class.new('2.222.222.222')).to_not be_valid
+    end
+
+    it 'not valid with X,XXX,XXX,XXX' do
+      expect(described_class.new('2,222,222,222')).to_not be_valid
+    end
+
+    it 'not valid with X_XXX_XXX_XXX' do
+      expect(described_class.new('2_222_222_222')).to_not be_valid
+    end
+  end
+
+  context 'valid digits' do
+    it 'valid with every digit except 0 and 1' do
+      expect(described_class.new('23456789999')).to be_valid
+    end
+
+    it 'not valid with 0' do
+      expect(described_class.new('23456789990')).to_not be_valid
+    end
+
+    it 'not valid with 1' do
+      expect(described_class.new('23456789991')).to_not be_valid
+    end
+  end
 end

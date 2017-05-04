@@ -17,6 +17,14 @@ class Speller
     find_matches(regexes)
   end
 
+  def min_chunk
+    @config[:breakdown]['min_length']
+  end
+
+  def max_chunk
+    @config[:breakdown]['max_length']
+  end
+
   private
 
   def load
@@ -45,7 +53,7 @@ class Speller
 
   def chunk(array)
     result = [[array]]
-    (@config[:breakdown]['min_length']..@config[:breakdown]['max_length']).each do |size|
+    (min_chunk..max_chunk).each do |size|
       slices = array.each_slice(size).to_a
       if slices.last.size < size && slices.size > 1
         last_elem = slices.pop

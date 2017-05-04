@@ -6,7 +6,6 @@ gem 'ruby-try', '~> 1.1', '>= 1.1.1'
 
 group :development do
   gem 'factory_girl_rails', require: false
-  gem 'faker', require: false
   gem 'pry', require: false
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false

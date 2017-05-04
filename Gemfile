@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'activemodel'
-gem 'jwt'
 gem 'ruby-try', '~> 1.1', '>= 1.1.1'
 
 group :development do

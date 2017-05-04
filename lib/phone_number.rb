@@ -10,7 +10,7 @@ class PhoneNumber
   validates :value, format: { with: /\A[0-9\-\s\(\)\+]+\Z/i,
                               message: 'have to contain only digits and dashes or brackets' }
 
-  validates :value, format: { with: /\A[\+]{0,1}[0-9]{1,3}[\-\s\(]{0,1}[0-9]{1,3}[\-\s\)]{0,1}[0-9\-]{1,9}\Z/i,
+  validates :value, format: { with: /\A[\+]{0,1}[0-9]{1,3}[\-\s\(]{0,1}[0-9]{1,3}[\-\s\)]{0,1}[0-9\-]{1,15}\Z/i,
                               message: 'have to be structured properly' }
 
   validates :country, presence: true
@@ -25,10 +25,10 @@ class PhoneNumber
 
   validates :number, presence: true
   validates_type :number, :string, message: 'number must be number'
-  validates :area, format: { with: /\A[0-9]+\Z/i,
+  validates :number, format: { with: /\A[0-9]+\Z/i,
                                 message: 'have to contain only digits' }
 
-  validates_each :country, :area, :number do |entity, attr, value|
+  validates_each :number do |entity, attr, value|
     entity.errors.add(attr, 'must not contain 0 or 1') if value.to_s =~ /[01]+/
   end
 
@@ -42,7 +42,7 @@ class PhoneNumber
 
   def parse
     _, @country, _, @area, _, @number = @value.scan(
-        /(\A[\+]{0,1})([0-9]{1,3})([\-\s\(]{0,1})([0-9]{1,3})([\-\s\)]{0,1})([0-9\-]{1,9})\Z/i
+      /(\A[\+]{0,1})([0-9]{1,3})([\-\s\(]{0,1})([0-9]{1,3})([\-\s\)]{0,1})([0-9\-]{1,15})\Z/i
     ).flatten
   end
 

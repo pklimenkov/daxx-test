@@ -52,7 +52,6 @@ GEM
       railties (>= 3.0.0)
     i18n (0.8.1)
     ice_nine (0.11.2)
-    jwt (1.5.6)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     method_source (0.8.2)
@@ -137,7 +136,6 @@ PLATFORMS
 DEPENDENCIES
   activemodel
   factory_girl_rails
-  jwt
   pry
   reek
   reek-git!
